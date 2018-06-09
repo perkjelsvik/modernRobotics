@@ -1,9 +1,12 @@
 %% Settings and parameters
+clc
 clear all
 
+addpath('code');
+
 % Is the real robot connected?
-realRobotOutput = true;
-plotRobot = false;
+realRobotOutput = false;
+plotRobot = true;
 % Serial port for robot: find out what name the port has
 com_port = '/dev/tty.usbmodem1421'; % UNIX example
 % com_port = 'COM3'; % Windows example
@@ -40,7 +43,8 @@ end
 %% Initialise
 % Do not change this section, unless you change the trajectory
 % Initial values of joint angles
-q=[0.0144 0.41 2.3]';
+q=[0.0144 0.41 2.3 ]';
+%q=[0 0 0]';
 
 if realRobotOutput
     % Slowly move to starting position
@@ -97,6 +101,8 @@ for i=1:N
     else
         q_robot = [0,0,0];
     end
+    
+    %q = [0 0 i*0.2];
     
     [H1_0, H2_0, H3_0] = getHmatrices(q, robot_params);
     [rH1_0, rH2_0, rH3_0] = getHmatrices(q_robot,robot_params);
