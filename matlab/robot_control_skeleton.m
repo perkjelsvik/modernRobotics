@@ -1,7 +1,7 @@
 %% Settings and parameters
 clc
 clear all
-
+    
 addpath('code');
 
 % Is the real robot connected?
@@ -61,7 +61,8 @@ q_robot = [0,0,0];
 q_robot_old = [0,0,0];
 
 qd = [0;0;0];
-
+xyz_set = zeros(3,N);
+xyz = zeros(3,N);
 tic
 for i=1:N
     % while loop to wait for timing
@@ -85,6 +86,7 @@ for i=1:N
     z = 8+ 6*sin(2*t);
     
     setpoint=[x;y;z];
+    xyz_set(:,i) = setpoint;
     
     % Calculate desired angle speeds
     qd = calculate_qd(q, setpoint, robot_params);
@@ -106,6 +108,7 @@ for i=1:N
     
     [H1_0, H2_0, H3_0] = getHmatrices(q, robot_params);
     [rH1_0, rH2_0, rH3_0] = getHmatrices(q_robot,robot_params);
+    xyz(:,i) = H3_0(1:3,4);
     
     % Plot the robot
     if plotRobot

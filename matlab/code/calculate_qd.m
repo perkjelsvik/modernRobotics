@@ -5,8 +5,8 @@ function q_set_dot = calculate_qd(q,P_set,L)
     
     Kv = 20;
     P_ee = H_n_0{3}(1:3,4);
-    P_ee_dot = Kv*(P_set-P_ee); 
-    if norm(P_ee_dot)>10
+    P_ee_dot = Kv*(P_set-P_ee);     %P-controller
+    if norm(P_ee_dot)>20
         P_ee_dot = 10*(P_ee_dot/norm(P_ee_dot));
     end
     
@@ -20,5 +20,5 @@ function q_set_dot = calculate_qd(q,P_set,L)
         J_prime{i} = Ad_H_0_4*J{i};
     end
     J_v = [J_prime{1}(4:6), J_prime{2}(4:6), J_prime{3}(4:6)];
-    q_set_dot = pinv(J_v)*P_ee_dot;
+    q_set_dot = pinv(J_v)*P_ee_dot; 
 end
