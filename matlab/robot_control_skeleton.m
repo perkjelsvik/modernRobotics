@@ -5,11 +5,11 @@ clear all
 addpath('code');
 
 % Is the real robot connected?
-realRobotOutput = false;
-plotRobot = true;
+realRobotOutput = true;
+plotRobot = false;
 % Serial port for robot: find out what name the port has
-com_port = '/dev/tty.usbmodem1421'; % UNIX example
-% com_port = 'COM3'; % Windows example
+%com_port = '/dev/tty.usbmodem1421'; % UNIX example
+com_port = 'COM4'; % Windows example
 
 %
 % Better not change the settings below
@@ -63,6 +63,7 @@ q_robot_old = [0,0,0];
 qd = [0;0;0];
 xyz_set = zeros(3,N);
 xyz = zeros(3,N);
+xyz_robot = zeros(3,N);
 tic
 for i=1:N
     % while loop to wait for timing
@@ -80,10 +81,12 @@ for i=1:N
         arm.set_q(q);
     end
     
-    % Generate setpoint
-    x = 8*cos(1*t);
-    y = -15;
-    z = 8+ 6*sin(2*t);
+    if mod(i,50)==1
+    	% Generate setpoint
+        x = 8*cos(1*t);
+        y = -15;
+        z = 8+ 6*sin(2*t);
+    end
     
     setpoint=[x;y;z];
     xyz_set(:,i) = setpoint;
@@ -104,11 +107,13 @@ for i=1:N
         q_robot = [0,0,0];
     end
     
-    %q = [0 0 i*0.2];
+    %q = [i*0.2 0 0];
+    %q_robot = [i*0.2 0 0];
     
     [H1_0, H2_0, H3_0] = getHmatrices(q, robot_params);
     [rH1_0, rH2_0, rH3_0] = getHmatrices(q_robot,robot_params);
     xyz(:,i) = H3_0(1:3,4);
+    xyz_robot(:,i) = rH3_0(1:3,4);
     
     % Plot the robot
     if plotRobot

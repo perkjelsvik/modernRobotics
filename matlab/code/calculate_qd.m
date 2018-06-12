@@ -7,7 +7,7 @@ function q_set_dot = calculate_qd(q,P_set,L)
     P_ee = H_n_0{3}(1:3,4);
     P_ee_dot = Kv*(P_set-P_ee);     %P-controller
     if norm(P_ee_dot)>20
-        P_ee_dot = 10*(P_ee_dot/norm(P_ee_dot));
+        P_ee_dot = 20*(P_ee_dot/norm(P_ee_dot));
     end
     
     H_0_4 = [eye(3), -H_n_0{3}(1:3,4); [0,0,0,1]];
