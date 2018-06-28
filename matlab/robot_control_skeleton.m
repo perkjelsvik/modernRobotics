@@ -81,12 +81,12 @@ for i=1:N
         arm.set_q(q);
     end
     
-    if mod(i,50)==1
+    %if mod(i,50)==1
     	% Generate setpoint
         x = 8*cos(1*t);
         y = -15;
         z = 8+ 6*sin(2*t);
-    end
+    %end
     
     setpoint=[x;y;z];
     xyz_set(:,i) = setpoint;
