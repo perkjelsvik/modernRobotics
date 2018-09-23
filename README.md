@@ -1,6 +1,6 @@
 # [191211060 - Modern Robotics](https://osiris.utwente.nl/student/OnderwijsCatalogusSelect.do?selectie=cursus&taal=en&collegejaar=2017&cursus=191211060)
 
-This course had a practical assignment where you had to do two exercises with a 3-DOF Robot Arm. This repo is for the practical.
+This course had a practical assignment where you had to do two exercises in groups of two or on your own with a 3-DOF Robot Arm. This repo is for the practical that I did with together with someone else. You can read a [short PDF report here](https://github.com/PerKjelsvik/ModRob/blob/master/Report.pdf).
 
 ## Course Content
 Goal: To give the students a basic knowledge on how to model 3D multi-body systems and control them. The presented techniques are the state of the art on robotics and very powerful tools. They can be used to model, control and analyse complex 3D systems like manipulators, walking machines and flying robots.  
